@@ -6,22 +6,19 @@
 using namespace std;
 
 extern "C" int StrLength(char* cad);
-extern "C" int* StrUpper(char* cad);
+extern "C" void StrUpper(char* cad);
+//extern "C" void StrLower(char* cad);
 
 int main()
 {
     char cad[] = "hola mundo";
-    int *p;
+    //char cad2[] = "HOLA MUNDO";
     
     cout << "1.a) Obtiene el numero de caracteres que tiene la cadena." << endl;
     cout <<  "La cadena tiene " << StrLength(cad) << " caracteres" << endl;
 
     cout << "2.a) Convierte a mayusculas una cadena." << endl;
-    p = StrUpper(cad);
-    for (int i = 0; i < StrLength(cad); i++)
-    {
-        cout << p[i];
-    }
-
+    StrUpper(cad);
+    cout << "La cadena en mayusculas es: " << cad << endl;
     
 }
