@@ -24,8 +24,8 @@ Ini_For:
 	INC ECX					; i <-- i + 1
 	INC ESI					; movemos el apuntador (p)
 	JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
-Fin_For:
-	MOV EAX, ECX			; return i  
+Fin_For: 
+	MOV EAX, ECX
 	POP ESI
 	POP ECX
 	RET 

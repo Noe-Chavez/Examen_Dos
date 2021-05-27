@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:12:58
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:48:40
 strlength.asm						     Page 1 - 1
 
 
@@ -28,15 +28,15 @@ strlength.asm						     Page 1 - 1
  00000013  41				INC ECX					; i <-- i + 1
  00000014  46				INC ESI					; movemos el apuntador (p)
  00000015  EB F6			JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
- 00000017			Fin_For:
- 00000017  8B C1			MOV EAX, ECX			; return i  
+ 00000017			Fin_For: 
+ 00000017  8B C1			MOV EAX, ECX
  00000019  5E				POP ESI
  0000001A  59				POP ECX
 					RET 
  0000001D			StrLength ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:12:58
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:48:40
 strlength.asm						     Symbols 2 - 1
 
 

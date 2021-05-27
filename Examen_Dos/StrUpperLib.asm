@@ -8,7 +8,7 @@
 	.CODE
 
 	; Funcion que conbvierte una cadena a mayusuclas
-	; void StrUpper(char *cad)
+	; int* StrUpper(char *cad)
 StrUpper PROC, pCad:DWORD
 
 	PUSH ECX
@@ -21,11 +21,12 @@ Ini_For:
 	CMP AL, 0				; AL - 0 (resta)
 	JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
 	; SI Z /= 0, entonces entramos al cuerpo del for.
+	; Aquí va el código para pasar la cedena a mayusuclas (averiguar si se puede utilizar el mismo pCad para la cadena)
 	INC ECX					; i <-- i + 1
 	INC ESI					; movemos el apuntador (p)
 	JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
 Fin_For:
-	MOV EAX, ECX			; return i  
+	;MOV EAX, ECX			; no olvidar que el el return regresa la primera dirección de memoria de pCad.  
 	POP ESI
 	POP ECX
 	RET 

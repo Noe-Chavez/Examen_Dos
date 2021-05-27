@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:13:18
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:50:58
 StrUpperLib.asm						     Page 1 - 1
 
 
@@ -29,14 +29,14 @@ StrUpperLib.asm						     Page 1 - 1
  00000014  46				INC ESI					; movemos el apuntador (p)
  00000015  EB F6			JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
  00000017			Fin_For:
- 00000017  8B C1			MOV EAX, ECX			; return i  
- 00000019  5E				POP ESI
- 0000001A  59				POP ECX
+					;MOV EAX, ECX			; return i  
+ 00000017  5E				POP ESI
+ 00000018  59				POP ECX
 					RET 
- 0000001D			StrUpper ENDP
+ 0000001B			StrUpper ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:13:18
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:50:58
 StrUpperLib.asm						     Symbols 2 - 1
 
 
@@ -49,14 +49,14 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00000A00 DWord	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001D DWord	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001B DWord	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
-StrUpper . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001D Public C
+StrUpper . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001B Public C
   pCad . . . . . . . . . . . . .	DWord	 bp + 00000008
   Ini_For  . . . . . . . . . . .	L Near	 0000000D _TEXT	
   Fin_For  . . . . . . . . . . .	L Near	 00000017 _TEXT	
