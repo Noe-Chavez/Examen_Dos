@@ -10,7 +10,7 @@ extern "C" int* StrUpper(char* cad);
 
 int main()
 {
-    char cad[] = "Hola Mundo";
+    char cad[] = "hola mundo";
     int *p;
     
     cout << "1.a) Obtiene el numero de caracteres que tiene la cadena." << endl;

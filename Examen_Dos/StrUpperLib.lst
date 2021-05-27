@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:50:58
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 09:28:23
 StrUpperLib.asm						     Page 1 - 1
 
 
@@ -9,34 +9,50 @@ StrUpperLib.asm						     Page 1 - 1
 
  00000000				.DATA
 
+ 00000000  0000000A [			temCad DWORD 10 DUP (0)
+	    00000000
+	   ]
+
  00000000				.CODE
 
 					; Funcion que conbvierte una cadena a mayusuclas
-					; void StrUpper(char *cad)
+					; int* StrUpper(char *cad)
  00000000			StrUpper PROC, pCad:DWORD
 
  00000003  51				PUSH ECX
  00000004  56				PUSH ESI
+ 00000005  57				PUSH EDI
 					
- 00000005  B9 00000000			MOV ECX, 0				; i = 0
- 0000000A  8B 75 08			MOV ESI, [pCad]			; apuntar (p) al primer elemento de pCad[0] (ESI <-- [pCad])
- 0000000D			Ini_For:
- 0000000D  8A 06			MOV AL, [ESI]			; leemos el primer caracter de la cadena
- 0000000F  3C 00			CMP AL, 0				; AL - 0 (resta)
- 00000011  74 04			JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
+ 00000006  BF 00000000 R		MOV EDI, OFFSET temCad  ; cargamos la direccion de memoria de tempCad en le registro EDI 
+ 0000000B  B9 00000000			MOV ECX, 0				; i = 0
+ 00000010  8B 75 08			MOV ESI, [pCad]			; apuntar (p) al primer elemento de pCad[0] (ESI <-- [pCad])
+
+ 00000013			Ini_For:
+ 00000013  8A 06			MOV AL, [ESI]			; leemos el primer caracter de la cadena AL<--pCad[i]
+ 00000015  3C 00			CMP AL, 0				; AL - 0 (resta)
+ 00000017  74 09			JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
 					; SI Z /= 0, entonces entramos al cuerpo del for.
- 00000013  41				INC ECX					; i <-- i + 1
- 00000014  46				INC ESI					; movemos el apuntador (p)
- 00000015  EB F6			JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
- 00000017			Fin_For:
-					;MOV EAX, ECX			; return i  
- 00000017  5E				POP ESI
- 00000018  59				POP ECX
+					;MOV [EDI], AL			; cargamos lo que hay en EDI <-- AL
+ 00000019  2C 20			SUB AL, 20h				; 20h = 32 decimal
+ 0000001B  88 07			MOV [EDI], AL			; tempCad[i] = AL
+ 0000001D  47				INC EDI
+ 0000001E  41				INC ECX					; i <-- i + 1
+ 0000001F  46				INC ESI					; movemos el apuntador (p)
+ 00000020  EB F1			JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
+
+ 00000022			Fin_For:
+ 00000022  8B C6			MOV EAX, ESI			; no olvidar que el el return regresa la primera dirección de memoria de pCad.  
+					
+ 00000024  5F				POP EDI
+ 00000025  5E				POP ESI
+ 00000026  59				POP ECX
+					
 					RET 
- 0000001B			StrUpper ENDP
+
+ 00000029			StrUpper ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:50:58
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 09:28:23
 StrUpperLib.asm						     Symbols 2 - 1
 
 
@@ -48,18 +64,18 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00000A00 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001B DWord	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000028 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000029 DWord	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
-StrUpper . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001B Public C
+StrUpper . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000029 Public C
   pCad . . . . . . . . . . . . .	DWord	 bp + 00000008
-  Ini_For  . . . . . . . . . . .	L Near	 0000000D _TEXT	
-  Fin_For  . . . . . . . . . . .	L Near	 00000017 _TEXT	
+  Ini_For  . . . . . . . . . . .	L Near	 00000013 _TEXT	
+  Fin_For  . . . . . . . . . . .	L Near	 00000022 _TEXT	
 
 
 Symbols:
@@ -75,6 +91,7 @@ Symbols:
 @fardata?  . . . . . . . . . . .	Text   	 FLAT
 @fardata . . . . . . . . . . . .	Text   	 FLAT
 @stack . . . . . . . . . . . . .	Text   	 FLAT
+temCad . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 
 	   0 Warnings
 	   0 Errors
