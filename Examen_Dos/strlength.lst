@@ -1,0 +1,80 @@
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:12:58
+strlength.asm						     Page 1 - 1
+
+
+					.386
+					.MODEL flat, C
+
+					.STACK 2560
+
+ 00000000				.DATA
+
+ 00000000				.CODE
+
+					; Funcion que regresa el tamano del arreglo
+					; int StrLength(char *cad)
+ 00000000			StrLength PROC, pCad:DWORD
+
+ 00000003  51				PUSH ECX
+ 00000004  56				PUSH ESI
+					
+ 00000005  B9 00000000			MOV ECX, 0				; i = 0
+ 0000000A  8B 75 08			MOV ESI, [pCad]			; apuntar (p) al primer elemento de pCad[0] (ESI <-- [pCad])
+ 0000000D			Ini_For:
+ 0000000D  8A 06			MOV AL, [ESI]			; leemos el primer caracter de la cadena
+ 0000000F  3C 00			CMP AL, 0				; AL - 0 (resta)
+ 00000011  74 04			JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
+					; SI Z /= 0, entonces entramos al cuerpo del for.
+ 00000013  41				INC ECX					; i <-- i + 1
+ 00000014  46				INC ESI					; movemos el apuntador (p)
+ 00000015  EB F6			JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
+ 00000017			Fin_For:
+ 00000017  8B C1			MOV EAX, ECX			; return i  
+ 00000019  5E				POP ESI
+ 0000001A  59				POP ECX
+					RET 
+ 0000001D			StrLength ENDP
+
+					END
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:12:58
+strlength.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00000A00 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001D DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+StrLength  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001D Public C
+  pCad . . . . . . . . . . . . .	DWord	 bp + 00000008
+  Ini_For  . . . . . . . . . . .	L Near	 0000000D _TEXT	
+  Fin_For  . . . . . . . . . . .	L Near	 00000017 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000001h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+
+	   0 Warnings
+	   0 Errors
