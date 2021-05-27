@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="strlength.asm" />
+    <MASM Include="StrLowerLib.asm" />
     <MASM Include="StrUpperLib.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

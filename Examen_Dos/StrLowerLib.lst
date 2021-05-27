@@ -1,5 +1,5 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:19
-StrUpperLib.asm						     Page 1 - 1
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:47
+StrLowerLib.asm						     Page 1 - 1
 
 
 					.386
@@ -17,7 +17,7 @@ StrUpperLib.asm						     Page 1 - 1
 
 					; Funcion que conbvierte una cadena a mayusuclas
 					; int* StrUpper(char *cad)
- 00000000			StrUpper PROC, pCad:DWORD
+ 00000000			StrLower PROC, pCad:DWORD
 
  00000003  51				PUSH ECX
  00000004  56				PUSH ESI
@@ -31,7 +31,7 @@ StrUpperLib.asm						     Page 1 - 1
  0000000F  3C 00			CMP AL, 0				; AL - 0 (resta)
  00000011  74 09			JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
 					; SI Z /= 0, entonces entramos al cuerpo del for.
- 00000013  2C 20			SUB AL, 20h				; 20h = 32 decimal
+ 00000013  04 20			ADD AL, 20h				; 20h = 32 decimal
  00000015  88 06			MOV [ESI], AL			; pCad[i] = AL su equivalente en mayuscula
  00000017  47				INC EDI					; incremetntamos el apuntador pCad
  00000018  41				INC ECX					; i <-- i + 1
@@ -46,11 +46,11 @@ StrUpperLib.asm						     Page 1 - 1
 					
 					RET 
 
- 00000020			StrUpper ENDP
+ 00000020			StrLower ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:19
-StrUpperLib.asm						     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:47
+StrLowerLib.asm						     Symbols 2 - 1
 
 
 
@@ -69,7 +69,7 @@ Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
-StrUpper . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000020 Public C
+StrLower . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000020 Public C
   pCad . . . . . . . . . . . . .	DWord	 bp + 00000008
   Ini_For  . . . . . . . . . . .	L Near	 0000000D _TEXT	
   Fin_For  . . . . . . . . . . .	L Near	 0000001C _TEXT	

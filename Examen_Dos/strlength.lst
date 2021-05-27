@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:48:40
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:19
 strlength.asm						     Page 1 - 1
 
 
@@ -36,7 +36,7 @@ strlength.asm						     Page 1 - 1
  0000001D			StrLength ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 00:48:40
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:19
 strlength.asm						     Symbols 2 - 1
 
 

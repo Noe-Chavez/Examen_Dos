@@ -26,5 +26,8 @@
     <MASM Include="StrUpperLib.asm">
       <Filter>Archivos de origen</Filter>
     </MASM>
+    <MASM Include="StrLowerLib.asm">
+      <Filter>Archivos de origen</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
