@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:47
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/31/21 00:18:34
 StrLowerLib.asm						     Page 1 - 1
 
 
@@ -49,7 +49,7 @@ StrLowerLib.asm						     Page 1 - 1
  00000020			StrLower ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:47
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/31/21 00:18:34
 StrLowerLib.asm						     Symbols 2 - 1
 
 

@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:19
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/31/21 00:18:34
 StrUpperLib.asm						     Page 1 - 1
 
 
@@ -49,7 +49,7 @@ StrUpperLib.asm						     Page 1 - 1
  00000020			StrUpper ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/27/21 18:40:19
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/31/21 00:18:34
 StrUpperLib.asm						     Symbols 2 - 1
 
 

@@ -8,11 +8,13 @@ using namespace std;
 extern "C" int StrLength(char* cad);
 extern "C" void StrUpper(char* cad);
 extern "C" void StrLower(char* cad);
+extern "C" void StrCopy(char* cad1, char* cad2);
 
 int main()
 {
     char cad[] = "holamundo";
     char cad2[] = "HOLAMUNDO";
+    char copia[10];
     
     cout << "1) Obtiene el numero de caracteres que tiene la cadena." << endl;
     cout <<  "La cadena tiene " << StrLength(cad) << " caracteres" << endl;
@@ -23,6 +25,10 @@ int main()
 
     cout << "3) Conviernte a minusculas una cadena" << endl;
     StrLower(cad2);
-    cout << "La cadena a mayusculas es: " << cad2 << endl;
+    cout << "La cadena a munusculas es: " << cad2 << endl;
+
+    cout << "4) Copia el contenido de una cadena" << endl;
+    StrCopy(cad, copia);
+    cout << "La cipia de la cadena es: " << cad << endl;
     
 }

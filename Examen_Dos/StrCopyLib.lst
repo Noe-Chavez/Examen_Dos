@@ -1,0 +1,66 @@
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/31/21 00:19:16
+StrCopyLib.asm						     Page 1 - 1
+
+
+					.386
+					.MODEL flat, C
+
+					.STACK 2560
+
+ 00000000				.DATA
+
+ 00000000  0000000A [			temCad DWORD 10 DUP (0)
+	    00000000
+	   ]
+
+ 00000000				.CODE
+
+					; Funcion que conbvierte una cadena a mayusuclas
+					; int* StrUpper(char *cad)
+ 00000000			StrCopy PROC, pCad:DWORD
+
+ 00000000			StrCopy ENDP
+StrCopyLib.asm(16) : warning A6004:procedure argument or local not referenced : pCad
+
+					END
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/31/21 00:19:16
+StrCopyLib.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00000A00 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000028 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+StrCopy  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000000 Public C
+  pCad . . . . . . . . . . . . .	DWord	 bp + 00000008
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000001h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+temCad . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+
+	   1 Warnings
+	   0 Errors
