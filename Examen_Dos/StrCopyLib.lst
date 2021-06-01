@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/31/21 00:19:16
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    06/01/21 11:18:33
 StrCopyLib.asm						     Page 1 - 1
 
 
@@ -9,21 +9,41 @@ StrCopyLib.asm						     Page 1 - 1
 
  00000000				.DATA
 
- 00000000  0000000A [			temCad DWORD 10 DUP (0)
-	    00000000
-	   ]
-
  00000000				.CODE
 
-					; Funcion que conbvierte una cadena a mayusuclas
-					; int* StrUpper(char *cad)
- 00000000			StrCopy PROC, pCad:DWORD
+					; Funcion que copia una cadena a otra cadena
+					; void StrCopy(char *cad, char *cadCopy)
+ 00000000			StrCopy PROC, pCad:DWORD, cadCopy:DWORD
 
- 00000000			StrCopy ENDP
-StrCopyLib.asm(16) : warning A6004:procedure argument or local not referenced : pCad
+ 00000003  51				PUSH ECX
+ 00000004  56				PUSH ESI
+ 00000005  53				PUSH EBX
+					
+ 00000006  8B 5D 0C			MOV EBX, [cadCopy]		; cargando el primer elemento del arreglo al registro CBX
+ 00000009  8B 75 08			MOV ESI, [pCad]			; apuntar (p) al primer elemento de pCad[0] (ESI <-- [pCad])
+ 0000000C  B9 00000000			MOV ECX, 0				; i = 0
+ 00000011			Ini_For:
+ 00000011  8A 06			MOV AL, [ESI]			; leemos el primer caracter de la cadena
+ 00000013  3C 00			CMP AL, 0				; AL - 0 (resta)
+ 00000015  74 0C			JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
+					; SI Z /= 0, entonces entramos al cuerpo del for
+ 00000017  B4 20			MOV AH, " "
+ 00000019  88 63 01			MOV [EBX + 1], AH		; limpiar cadena anterior
+ 0000001C  88 03			MOV [EBX], AL			; cadCopy[i] = AL, donde AL <-- pCad[i]
+ 0000001E  41				INC ECX					; i <-- i + 1
+ 0000001F  46				INC ESI					; movemos el apuntador (p) para pCad
+ 00000020  43				INC EBX					; movemos el apuntador (p) para cadCopy
+ 00000021  EB EE			JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
+ 00000023			Fin_For: 
+ 00000023  59				POP ECX
+ 00000024  5E				POP ESI
+ 00000025  5B				POP EBX
+					RET
+
+ 00000028			StrCopy ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    05/31/21 00:19:16
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    06/01/21 11:18:33
 StrCopyLib.asm						     Symbols 2 - 1
 
 
@@ -35,16 +55,19 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00000A00 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000028 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000028 DWord	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
-StrCopy  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000000 Public C
+StrCopy  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000028 Public C
   pCad . . . . . . . . . . . . .	DWord	 bp + 00000008
+  cadCopy  . . . . . . . . . . .	DWord	 bp + 0000000C
+  Ini_For  . . . . . . . . . . .	L Near	 00000011 _TEXT	
+  Fin_For  . . . . . . . . . . .	L Near	 00000023 _TEXT	
 
 
 Symbols:
@@ -60,7 +83,6 @@ Symbols:
 @fardata?  . . . . . . . . . . .	Text   	 FLAT
 @fardata . . . . . . . . . . . .	Text   	 FLAT
 @stack . . . . . . . . . . . . .	Text   	 FLAT
-temCad . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 
-	   1 Warnings
+	   0 Warnings
 	   0 Errors

@@ -14,7 +14,7 @@ int main()
 {
     char cad[] = "holamundo";
     char cad2[] = "HOLAMUNDO";
-    char copia[10];
+    char copia[] = "Sin copiar";
     
     cout << "1) Obtiene el numero de caracteres que tiene la cadena." << endl;
     cout <<  "La cadena tiene " << StrLength(cad) << " caracteres" << endl;
@@ -29,6 +29,6 @@ int main()
 
     cout << "4) Copia el contenido de una cadena" << endl;
     StrCopy(cad, copia);
-    cout << "La cipia de la cadena es: " << cad << endl;
+    cout << "La copia de la cadena es: " << copia << endl;
     
 }
