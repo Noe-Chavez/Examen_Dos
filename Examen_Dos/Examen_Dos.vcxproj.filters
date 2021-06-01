@@ -32,5 +32,8 @@
     <MASM Include="StrCopyLib.asm">
       <Filter>Archivos de origen</Filter>
     </MASM>
+    <MASM Include="StrCatLib.asm">
+      <Filter>Archivos de origen</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

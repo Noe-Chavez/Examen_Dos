@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="StrCatLib.asm" />
     <MASM Include="StrCopyLib.asm" />
     <MASM Include="strlength.asm" />
     <MASM Include="StrLowerLib.asm" />
