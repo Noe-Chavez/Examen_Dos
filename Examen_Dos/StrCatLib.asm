@@ -15,7 +15,7 @@ StrCat PROC, pCad:DWORD, pCad2:DWORD
 	PUSH ESI
 	PUSH EBX
 	
-	MOV EBX, [pC ad2]		; cargando el primer elemento del arreglo al registro CBX
+	MOV EBX, [pCad2]		; cargando el primer elemento del arreglo al registro CBX
 	MOV ESI, [pCad]			; apuntar (p) al primer elemento de pCad[0] (ESI <-- [pCad])
 	MOV ECX, 0				; i = 0
 Ini_For:
@@ -23,12 +23,23 @@ Ini_For:
 	CMP AL, 0				; AL - 0 (resta)
 	JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
 	; SI Z /= 0, entonces entramos al cuerpo del for
-	; Codigo
+	INC ECX					; i <-- i + 1
+	INC ESI					; movemos el apuntador (p) para pCad
+	JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
+Fin_For: 
+
+Ini_For2:
+	MOV AH, [EBX]			; leemos el primer caracter de la cadena
+	CMP AH, 0				; AL - 0 (resta)
+	JE	Fin_For2			; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
+	; SI Z /= 0, entonces entramos al cuerpo del for
+	MOV [ESI], AH
 	INC ECX					; i <-- i + 1
 	INC ESI					; movemos el apuntador (p) para pCad
 	INC EBX					; movemos el apuntador (p) para pCad2
-	JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
-Fin_For: 
+	JMP Ini_For2			; volvemos a realizar otro ciclo, hasta que z = 0 
+Fin_For2: 
+
 	POP ECX
 	POP ESI
 	POP EBX

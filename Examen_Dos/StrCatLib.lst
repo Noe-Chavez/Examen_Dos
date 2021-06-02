@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    06/01/21 12:43:06
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    06/02/21 02:18:36
 StrCatLib.asm						     Page 1 - 1
 
 
@@ -13,35 +13,46 @@ StrCatLib.asm						     Page 1 - 1
 
 					; Funcion que copia una cadena a otra cadena
 					; void StrCopy(char *cad, char *cadCopy)
- 00000000			StrCat PROC, pCad:DWORD, pcad2:DWORD
+ 00000000			StrCat PROC, pCad:DWORD, pCad2:DWORD
 
  00000003  51				PUSH ECX
  00000004  56				PUSH ESI
  00000005  53				PUSH EBX
 					
- 00000006  8B 5D 0C			MOV EBX, [pcad2]		; cargando el primer elemento del arreglo al registro CBX
+ 00000006  8B 5D 0C			MOV EBX, [pCad2]		; cargando el primer elemento del arreglo al registro CBX
  00000009  8B 75 08			MOV ESI, [pCad]			; apuntar (p) al primer elemento de pCad[0] (ESI <-- [pCad])
  0000000C  B9 00000000			MOV ECX, 0				; i = 0
  00000011			Ini_For:
  00000011  8A 06			MOV AL, [ESI]			; leemos el primer caracter de la cadena
  00000013  3C 00			CMP AL, 0				; AL - 0 (resta)
- 00000015  74 05			JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
+ 00000015  74 04			JE	Fin_For				; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
 					; SI Z /= 0, entonces entramos al cuerpo del for
-					; Codigo
  00000017  41				INC ECX					; i <-- i + 1
  00000018  46				INC ESI					; movemos el apuntador (p) para pCad
- 00000019  43				INC EBX					; movemos el apuntador (p) para cadCopy
- 0000001A  EB F5			JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
- 0000001C			Fin_For: 
- 0000001C  59				POP ECX
- 0000001D  5E				POP ESI
- 0000001E  5B				POP EBX
+ 00000019  EB F6			JMP Ini_For				; volvemos a realizar otro ciclo, hasta que z = 0 
+ 0000001B			Fin_For: 
+
+ 0000001B			Ini_For2:
+ 0000001B  8A 23			MOV AH, [EBX]			; leemos el primer caracter de la cadena
+ 0000001D  80 FC 00			CMP AH, 0				; AL - 0 (resta)
+ 00000020  74 07			JE	Fin_For2			; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
+					; SI Z /= 0, entonces entramos al cuerpo del for
+ 00000022  88 26			MOV [ESI], AH
+ 00000024  41				INC ECX					; i <-- i + 1
+ 00000025  46				INC ESI					; movemos el apuntador (p) para pCad
+ 00000026  43				INC EBX					; movemos el apuntador (p) para pCad2
+ 00000027  EB F2			JMP Ini_For2			; volvemos a realizar otro ciclo, hasta que z = 0 
+ 00000029			Fin_For2: 
+
+ 00000029  59				POP ECX
+ 0000002A  5E				POP ESI
+ 0000002B  5B				POP EBX
 					RET
 
- 00000021			StrCat ENDP
+ 0000002E			StrCat ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    06/01/21 12:43:06
+Microsoft (R) Macro Assembler Version 14.28.29915.0	    06/02/21 02:18:36
 StrCatLib.asm						     Symbols 2 - 1
 
 
@@ -54,18 +65,20 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00000A00 DWord	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000021 DWord	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000002E DWord	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
-StrCat . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000021 Public C
+StrCat . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000002E Public C
   pCad . . . . . . . . . . . . .	DWord	 bp + 00000008
-  pcad2  . . . . . . . . . . . .	DWord	 bp + 0000000C
+  pCad2  . . . . . . . . . . . .	DWord	 bp + 0000000C
   Ini_For  . . . . . . . . . . .	L Near	 00000011 _TEXT	
-  Fin_For  . . . . . . . . . . .	L Near	 0000001C _TEXT	
+  Fin_For  . . . . . . . . . . .	L Near	 0000001B _TEXT	
+  Ini_For2 . . . . . . . . . . .	L Near	 0000001B _TEXT	
+  Fin_For2 . . . . . . . . . . .	L Near	 00000029 _TEXT	
 
 
 Symbols:
