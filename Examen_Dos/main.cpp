@@ -10,12 +10,14 @@ extern "C" void StrUpper(char* cad);
 extern "C" void StrLower(char* cad);
 extern "C" void StrCopy(char* cad1, char* cad2);
 extern "C" void StrCat(char* cad1, char* cad2);
+extern "C" int Sumar(int* lista, int N);
 
 int main()
 {
     char cad[] = "holamundo";
     char cad2[] = "HOLAMUNDO";
     char copia[] = "Sin copiar";
+    int numeros[] = {3, 5, 6, 7, 8};
     
     cout << "1) Obtiene el numero de caracteres que tiene la cadena." << endl;
     cout <<  "La cadena tiene " << StrLength(cad) << " caracteres" << endl;
@@ -33,7 +35,10 @@ int main()
     cout << "La copia de la cadena es: " << copia << endl;
 
     cout << "5) Concatena dos cadenas" << endl;
-    StrCat(cad, cad2);
+    //StrCat(cad, cad2);
     cout << "La concatenacion de la cadena es: " << cad << endl;
+
+    cout << "6) sumar los elementos del arreglo" << endl;
+    cout << "la suma de los elementos del arreglo es: " << Sumar(numeros, 5) << endl;
     
 }

@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    06/02/21 02:18:36
+Microsoft (R) Macro Assembler Version 14.29.30037.0	    06/03/21 01:59:33
 StrCatLib.asm						     Page 1 - 1
 
 
@@ -37,22 +37,23 @@ StrCatLib.asm						     Page 1 - 1
  0000001D  80 FC 00			CMP AH, 0				; AL - 0 (resta)
  00000020  74 07			JE	Fin_For2			; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
 					; SI Z /= 0, entonces entramos al cuerpo del for
- 00000022  88 26			MOV [ESI], AH
+ 00000022  88 26			MOV [ESI], AH			; ESI <-- ESI[AH]
  00000024  41				INC ECX					; i <-- i + 1
  00000025  46				INC ESI					; movemos el apuntador (p) para pCad
  00000026  43				INC EBX					; movemos el apuntador (p) para pCad2
  00000027  EB F2			JMP Ini_For2			; volvemos a realizar otro ciclo, hasta que z = 0 
  00000029			Fin_For2: 
 
- 00000029  59				POP ECX
+ 00000029  5B				POP EBX
  0000002A  5E				POP ESI
- 0000002B  5B				POP EBX
+ 0000002B  59				POP ECX
+
 					RET
 
  0000002E			StrCat ENDP
 
 					END
-Microsoft (R) Macro Assembler Version 14.28.29915.0	    06/02/21 02:18:36
+Microsoft (R) Macro Assembler Version 14.29.30037.0	    06/03/21 01:59:33
 StrCatLib.asm						     Symbols 2 - 1
 
 

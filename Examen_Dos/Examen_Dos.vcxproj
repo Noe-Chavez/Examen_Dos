@@ -151,6 +151,7 @@
     <MASM Include="strlength.asm" />
     <MASM Include="StrLowerLib.asm" />
     <MASM Include="StrUpperLib.asm" />
+    <MASM Include="SumarLib.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

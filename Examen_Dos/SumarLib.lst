@@ -1,0 +1,63 @@
+Microsoft (R) Macro Assembler Version 14.29.30037.0	    06/03/21 02:05:17
+SumarLib.asm						     Page 1 - 1
+
+
+					.386
+					.MODEL flat, C
+
+					.STACK 2560
+
+ 00000000				.DATA
+
+ 00000000				.CODE
+
+					; Funcion que suma los elementos del vector 
+					; int Sumar(int *lista, int N);
+ 00000000			Sumar PROC, pArray:DWORD, numElem:DWORD
+
+ 00000000			Sumar ENDP
+SumarLib.asm(14) : warning A6004:procedure argument or local not referenced : pArray
+SumarLib.asm(14) : warning A6004:procedure argument or local not referenced : numElem
+
+					END
+Microsoft (R) Macro Assembler Version 14.29.30037.0	    06/03/21 02:05:17
+SumarLib.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00000A00 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+Sumar  . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000000 Public C
+  pArray . . . . . . . . . . . .	DWord	 bp + 00000008
+  numElem  . . . . . . . . . . .	DWord	 bp + 0000000C
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000001h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+
+	   2 Warnings
+	   0 Errors

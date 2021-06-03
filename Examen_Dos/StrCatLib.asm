@@ -33,16 +33,17 @@ Ini_For2:
 	CMP AH, 0				; AL - 0 (resta)
 	JE	Fin_For2			; Si z = 0, entonces ya se acabo la cadena, por lo que saltamos a Fin_For  
 	; SI Z /= 0, entonces entramos al cuerpo del for
-	MOV [ESI], AH
+	MOV [ESI], AH			; ESI <-- ESI[AH]
 	INC ECX					; i <-- i + 1
 	INC ESI					; movemos el apuntador (p) para pCad
 	INC EBX					; movemos el apuntador (p) para pCad2
 	JMP Ini_For2			; volvemos a realizar otro ciclo, hasta que z = 0 
 Fin_For2: 
 
-	POP ECX
-	POP ESI
 	POP EBX
+	POP ESI
+	POP ECX
+
 	RET
 
 StrCat ENDP
