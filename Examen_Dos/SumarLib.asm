@@ -4,7 +4,7 @@
 	.STACK 2560
 
 	.DATA
-
+	temp BYTE 0
 	.CODE
 
 	; Funcion que suma los elementos del vector 
@@ -17,11 +17,15 @@ Sumar PROC, pArray:DWORD, numElem:DWORD
 	MOV ECX, 0				; i = 0
 	MOV EAX, 0
 	MOV EDX, numElem		; cantidad de elementos en el arreglo
+	MOV AL, [ESI]			; leemos el primer elemento del array
 ciclo:
 	CMP ECX, EDX			; compara ECX (i) y EDX (numElement)
 	JE fin_ciclo			; sí ECX == EDX, se sale del ciclo
-	MOV EAX, [ESI]			; leemos el primer elemento del array
-	ADD EAX, [ESI + 8]
+	;MOV AL, [ESI]			; leemos el primer elemento del array
+	MOV temp, AL			; salvamos temporalmente el valor de pArray[i]
+	MOV AL, [ESI + 4]		; obtenemos el valor de pArray[i + 1]
+	ADD AL, temp			; asemos la suma de pArray[i] + pArray[i + 1]
+	MOV temp, AL
 	INC ESI					; movemos el apuntador (pArray)
 	INC ECX					; i++
 	JMP ciclo

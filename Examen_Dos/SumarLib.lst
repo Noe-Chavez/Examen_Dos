@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30037.0	    06/03/21 03:21:30
+Microsoft (R) Macro Assembler Version 14.29.30037.0	    06/03/21 17:09:24
 SumarLib.asm						     Page 1 - 1
 
 
@@ -8,7 +8,7 @@ SumarLib.asm						     Page 1 - 1
 					.STACK 2560
 
  00000000				.DATA
-
+ 00000000 00				temp BYTE 0
  00000000				.CODE
 
 					; Funcion que suma los elementos del vector 
@@ -17,28 +17,32 @@ SumarLib.asm						     Page 1 - 1
  00000003  56				PUSH ESI
  00000004  51				PUSH ECX
  00000005  52				PUSH EDX
- 00000006  8B 75 08			MOV ESI, pArray		; cargando el primer elemento del arreglo al registro CBX
+ 00000006  8B 75 08			MOV ESI, [pArray]		; cargando el primer elemento del arreglo al registro CBX
  00000009  B9 00000000			MOV ECX, 0				; i = 0
  0000000E  B8 00000000			MOV EAX, 0
  00000013  8B 55 0C			MOV EDX, numElem		; cantidad de elementos en el arreglo
- 00000016			ciclo:
- 00000016  3B CA			CMP ECX, EDX			; compara ECX (i) y EDX (numElement)
- 00000018  74 09			JE fin_ciclo			; sí ECX == EDX, se sale del ciclo
- 0000001A  8B 06			MOV EAX, [ESI]			; leemos el primer elemento del array
- 0000001C  03 46 08			ADD EAX, [ESI + 8]
- 0000001F  46				INC ESI					; movemos el apuntador (pArray)
- 00000020  41				INC ECX					; i++
- 00000021  EB F3			JMP ciclo
- 00000023			fin_ciclo:
+ 00000016  8A 06			MOV AL, [ESI]			; leemos el primer elemento del array
+ 00000018			ciclo:
+ 00000018  3B CA			CMP ECX, EDX			; compara ECX (i) y EDX (numElement)
+ 0000001A  74 17			JE fin_ciclo			; sí ECX == EDX, se sale del ciclo
+					;MOV AL, [ESI]			; leemos el primer elemento del array
+ 0000001C  A2 00000000 R		MOV temp, AL			; salvamos temporalmente el valor de pArray[i]
+ 00000021  8A 46 04			MOV AL, [ESI + 4]		; obtenemos el valor de pArray[i + 1]
+ 00000024  02 05 00000000 R		ADD AL, temp			; asemos la suma de pArray[i] + pArray[i + 1]
+ 0000002A  A2 00000000 R		MOV temp, AL
+ 0000002F  46				INC ESI					; movemos el apuntador (pArray)
+ 00000030  41				INC ECX					; i++
+ 00000031  EB E5			JMP ciclo
+ 00000033			fin_ciclo:
 					; Finalizar ciclo
 					; para regresar el valor se deben colocar en el registro EAX
- 00000023  5A				POP EDX
- 00000024  59				POP ECX
- 00000025  5E				POP ESI
+ 00000033  5A				POP EDX
+ 00000034  59				POP ECX
+ 00000035  5E				POP ESI
 					RET
- 00000028			Sumar ENDP
+ 00000038			Sumar ENDP
 					END
-Microsoft (R) Macro Assembler Version 14.29.30037.0	    06/03/21 03:21:30
+Microsoft (R) Macro Assembler Version 14.29.30037.0	    06/03/21 17:09:24
 SumarLib.asm						     Symbols 2 - 1
 
 
@@ -50,19 +54,19 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00000A00 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000028 DWord	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000001 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000038 DWord	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
-Sumar  . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000028 Public C
+Sumar  . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000038 Public C
   pArray . . . . . . . . . . . .	DWord	 bp + 00000008
   numElem  . . . . . . . . . . .	DWord	 bp + 0000000C
-  ciclo  . . . . . . . . . . . .	L Near	 00000016 _TEXT	
-  fin_ciclo  . . . . . . . . . .	L Near	 00000023 _TEXT	
+  ciclo  . . . . . . . . . . . .	L Near	 00000018 _TEXT	
+  fin_ciclo  . . . . . . . . . .	L Near	 00000033 _TEXT	
 
 
 Symbols:
@@ -78,6 +82,7 @@ Symbols:
 @fardata?  . . . . . . . . . . .	Text   	 FLAT
 @fardata . . . . . . . . . . . .	Text   	 FLAT
 @stack . . . . . . . . . . . . .	Text   	 FLAT
+temp . . . . . . . . . . . . . .	Byte	 00000000 _DATA	
 
 	   0 Warnings
 	   0 Errors
